@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context="com.sbrt.ponomarev.animal.MainActivity">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal"
+        >
+
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:layout_weight="1"
+            >
+                <TextView
+                        android:id="@+id/name_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        android:text="@string/name"
+
+                        tools:text="Name:"/>
+                <TextView
+                        android:id="@+id/species_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/name_title"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        android:text="@string/species"
+
+                        tools:text="Species:"/>
+
+                <TextView
+                        android:id="@+id/weight_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/species_title"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        android:text="@string/weight"
+
+                        tools:text="Weight:"/>
+                <TextView
+                        android:id="@+id/height_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/weight_title"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        android:text="@string/height"
+
+                        tools:text="Height:"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+            >
+
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        tools:text="Bob"/>
+                <TextView
+                        android:id="@+id/species"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/name"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        tools:text="Dog"/>
+                <TextView
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/species"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        tools:text="10 kg"/>
+                <TextView
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@id/weight"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+
+                        tools:text="100 cm"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+
+                android:text="@string/refresh"
+
+                tools:text="Refresh"/>
+    </RelativeLayout>
+</ScrollView>

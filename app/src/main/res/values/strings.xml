@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Animal</string>
+    <string name="refresh">Refresh</string>
+    <string name="name">Name:</string>
+    <string name="species">Species:</string>
+    <string name="weight">Weight:</string>
+    <string name="height">Height:</string>
+</resources>
