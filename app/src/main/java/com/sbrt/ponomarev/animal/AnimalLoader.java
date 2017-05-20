@@ -55,19 +55,6 @@ public class AnimalLoader extends AsyncTaskLoader<List<Animal>> implements OnCon
     }
 
     @Override
-    protected void onAbandon() {
-        super.onAbandon();
-        Log.e(LOG, "onAbandon");
-    }
-
-
-    @Override
-    public void abandon() {
-        super.abandon();
-        Log.e(LOG, "abandon");
-    }
-
-    @Override
     public void onAnimalAdded(AnimalsStorage storage, Animal animal) {
         onContentChanged();
     }

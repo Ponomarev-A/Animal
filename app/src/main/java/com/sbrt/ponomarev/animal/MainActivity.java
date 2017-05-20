@@ -1,5 +1,6 @@
 package com.sbrt.ponomarev.animal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mAnimalsStorage = ((AnimalsStorageProvider) getApplication()).getAnimalsStorage();
 
         mAnimalsView = (RecyclerView) findViewById(R.id.list);
-        mAnimalAdapter = new AnimalsAdapter();
+        mAnimalAdapter = new AnimalsAdapter(MainActivity.this);
         mAnimalsView.setAdapter(mAnimalAdapter);
 
         getSupportLoaderManager().initLoader(LOADER_ID, null, new AnimalLoaderCallbacks());
@@ -44,11 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_animal_menu_item:
-                startActivity(AddAnimalActivity.newIntent(this));
-                return true;
-
-            case R.id.destroy_loader_menu_item:
-                getSupportLoaderManager().destroyLoader(LOADER_ID);
+                startActivity(new Intent(MainActivity.this, AddAnimalActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

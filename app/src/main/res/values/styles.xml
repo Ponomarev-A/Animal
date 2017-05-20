@@ -8,4 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextLargeStyle" parent="Base.TextAppearance.AppCompat.Large"/>
+
 </resources>
