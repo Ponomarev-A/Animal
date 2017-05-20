@@ -5,4 +5,9 @@
     <string name="species">Species:</string>
     <string name="weight">Weight:</string>
     <string name="height">Height:</string>
+    <string name="add_animal">add animal</string>
+    <string name="add_species">Species (ex. Dog)</string>
+    <string name="add_name">Name</string>
+    <string name="add_weight_kg">Weight (kg)</string>
+    <string name="add_height">Height (cm)</string>
 </resources>

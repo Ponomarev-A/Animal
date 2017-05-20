@@ -3,10 +3,12 @@ package com.sbrt.ponomarev.animal;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,53 +16,59 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int LOADER_ID = 10;
 
-    private Button mRefreshButton;
-    private TextView mNameTextView;
-    private TextView mHeightTextView;
-    private TextView mWeightTextView;
-    private TextView mSpeciesTextView;
+    private RecyclerView mAnimalsView;
+    private AnimalsAdapter mAnimalAdapter;
+    private AnimalsStorage mAnimalsStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNameTextView = (TextView) findViewById(R.id.name);
-        mSpeciesTextView = (TextView) findViewById(R.id.species);
-        mWeightTextView = (TextView) findViewById(R.id.weight);
-        mHeightTextView = (TextView) findViewById(R.id.height);
-        mRefreshButton = (Button) findViewById(R.id.refresh);
+        mAnimalsStorage = ((AnimalsStorageProvider) getApplication()).getAnimalsStorage();
 
-        mRefreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportLoaderManager().getLoader(LOADER_ID).forceLoad();
-            }
-        });
+        mAnimalsView = (RecyclerView) findViewById(R.id.list);
+        mAnimalAdapter = new AnimalsAdapter();
+        mAnimalsView.setAdapter(mAnimalAdapter);
 
         getSupportLoaderManager().initLoader(LOADER_ID, null, new AnimalLoaderCallbacks());
-
     }
 
-    private class AnimalLoaderCallbacks implements android.support.v4.app.LoaderManager.LoaderCallbacks<Animal> {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_animal_menu_item:
+                startActivity(AddAnimalActivity.newIntent(this));
+                return true;
+
+            case R.id.destroy_loader_menu_item:
+                getSupportLoaderManager().destroyLoader(LOADER_ID);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private class AnimalLoaderCallbacks implements android.support.v4.app.LoaderManager.LoaderCallbacks<List<Animal>> {
         @Override
-        public Loader<Animal> onCreateLoader(int id, Bundle args) {
+        public Loader<List<Animal>> onCreateLoader(int id, Bundle args) {
             Log.e(LOG, "onCreateLoader");
-            return new AnimalLoader(MainActivity.this);
+            return new AnimalLoader(MainActivity.this, mAnimalsStorage);
         }
 
         @Override
-        public void onLoadFinished(Loader<Animal> loader, Animal animal) {
+        public void onLoadFinished(Loader<List<Animal>> loader, List<Animal> animals) {
             Log.e(LOG, "onLoadFinished");
-
-            mNameTextView.setText(animal.getName());
-            mSpeciesTextView.setText(animal.getSpecies());
-            mWeightTextView.setText(String.valueOf(animal.getWeight()));
-            mHeightTextView.setText(String.valueOf(animal.getHeight()));
+            mAnimalAdapter.setAnimals(animals);
         }
 
         @Override
-        public void onLoaderReset(Loader<Animal> loader) {
+        public void onLoaderReset(Loader<List<Animal>> loader) {
             Log.e(LOG, "onLoaderReset");
         }
     }
