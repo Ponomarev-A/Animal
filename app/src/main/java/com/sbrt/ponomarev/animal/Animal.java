@@ -6,32 +6,32 @@ package com.sbrt.ponomarev.animal;
 
 public class Animal {
 
-    private String name;
-    private String species;
-    private Float weight;
-    private Float height;
+    private String mName;
+    private String mSpecies;
+    private Float mWeight;
+    private Float mHeight;
 
 
     public Animal(String name, String species, Float weight, Float height) {
-        this.name = name;
-        this.species = species;
-        this.weight = weight;
-        this.height = height;
+        this.mName = name;
+        this.mSpecies = species;
+        this.mWeight = weight;
+        this.mHeight = height;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public String getSpecies() {
-        return species;
+        return mSpecies;
     }
 
     public Float getWeight() {
-        return weight;
+        return mWeight;
     }
 
     public Float getHeight() {
-        return height;
+        return mHeight;
     }
 }
