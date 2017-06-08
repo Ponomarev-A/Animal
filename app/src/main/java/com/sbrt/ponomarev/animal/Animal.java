@@ -8,11 +8,11 @@ import java.io.Serializable;
 
 public class Animal implements Serializable {
 
-    private String mName;
-    private String mSpecies;
-    private Float mWeight;
-    private Float mHeight;
-    private long id;
+    private String name;
+    private String species;
+    private Float weight;
+    private Float height;
+
 
     public Animal(String name, String species, Float weight, Float height) {
         this.mName = name;

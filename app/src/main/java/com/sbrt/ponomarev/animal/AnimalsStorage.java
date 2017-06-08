@@ -2,6 +2,8 @@ package com.sbrt.ponomarev.animal;
 
 import com.sbrt.ponomarev.animal.db.AnimalsDAO;
 
+import com.sbrt.ponomarev.animal.db.AnimalsDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class AnimalsStorage {
     public List<Animal> getAnimals() {
         return new ArrayList<>(dao.getAnimals());
     }
+
 
 
     public void addOnContentChangeListener(OnContentChangeListener listener) {
