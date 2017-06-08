@@ -8,11 +8,12 @@ import java.io.Serializable;
 
 public class Animal implements Serializable {
 
+    private long mId;
     private String mName;
     private String mSpecies;
     private Float mWeight;
     private Float mHeight;
-    private long id;
+
 
     public Animal(String name, String species, Float weight, Float height) {
         this.mName = name;
@@ -23,7 +24,7 @@ public class Animal implements Serializable {
 
 
     public Animal(long id, String name, String species, int weight, int height) {
-        this.id = id;
+        this.mId = id;
         this.mName = name;
         this.mSpecies = species;
         this.mWeight = Float.valueOf(weight);
@@ -47,11 +48,11 @@ public class Animal implements Serializable {
     }
 
     public long getId() {
-        return id;
+        return mId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.mId = id;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class Animal implements Serializable {
 
         Animal animal = (Animal) o;
 
-        if (id != animal.id) return false;
+        if (mId != animal.mId) return false;
         if (mName != null ? !mName.equals(animal.mName) : animal.mName != null) return false;
         if (mSpecies != null ? !mSpecies.equals(animal.mSpecies) : animal.mSpecies != null)
             return false;
@@ -77,7 +78,7 @@ public class Animal implements Serializable {
         result = 31 * result + (mSpecies != null ? mSpecies.hashCode() : 0);
         result = 31 * result + (mWeight != null ? mWeight.hashCode() : 0);
         result = 31 * result + (mHeight != null ? mHeight.hashCode() : 0);
-        result = 31 * result + (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (mId ^ (mId >>> 32));
         return result;
     }
 }

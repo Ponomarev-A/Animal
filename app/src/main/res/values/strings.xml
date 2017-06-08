@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Animal</string>
-    <string name="refresh">Refresh</string>
-    <string name="name">Name:</string>
-    <string name="species">Species:</string>
-    <string name="weight">Weight:</string>
-    <string name="height">Height:</string>
+    <string name="name">Name: %1$s</string>
+    <string name="species">Species: %1$s</string>
+    <string name="weight">%1$.0f kg</string>
+    <string name="height">%1$.0f cm</string>
     <string name="add_animal">add animal</string>
     <string name="add_species">Species (ex. Dog)</string>
     <string name="add_name">Name</string>
