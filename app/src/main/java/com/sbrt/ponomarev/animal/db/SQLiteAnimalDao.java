@@ -139,8 +139,8 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
                 .append(AnimalsContract.Animal._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
                 .append(AnimalsContract.Animal.NAME).append(" TEXT NOT NULL, ")
                 .append(AnimalsContract.Animal.SPECIES).append(" TEXT NOT NULL, ")
-                .append(AnimalsContract.Animal.WEIGHT).append(" INTEGER NOT NULL, ")
-                .append(AnimalsContract.Animal.HEIGHT).append(" INTEGER NOT NULL")
+                .append(AnimalsContract.Animal.WEIGHT).append(" REAL NOT NULL, ")
+                .append(AnimalsContract.Animal.HEIGHT).append(" REAL NOT NULL")
                 .append(");")
                 .toString();
         Log.e(TAG, "onCreate: " + sql);

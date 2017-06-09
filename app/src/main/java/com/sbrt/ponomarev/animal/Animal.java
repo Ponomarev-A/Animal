@@ -23,12 +23,12 @@ public class Animal implements Serializable {
     }
 
 
-    public Animal(long id, String name, String species, int weight, int height) {
+    public Animal(long id, String name, String species, Float weight, Float height) {
         this.mId = id;
         this.mName = name;
         this.mSpecies = species;
-        this.mWeight = Float.valueOf(weight);
-        this.mHeight = Float.valueOf(height);
+        this.mWeight = weight;
+        this.mHeight = height;
     }
 
 
@@ -66,27 +66,25 @@ public class Animal implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = mName != null ? mName.hashCode() : 0;
+        int result = (int) (mId ^ (mId >>> 32));
+        result = 31 * result + (mName != null ? mName.hashCode() : 0);
         result = 31 * result + (mSpecies != null ? mSpecies.hashCode() : 0);
         result = 31 * result + (mWeight != null ? mWeight.hashCode() : 0);
         result = 31 * result + (mHeight != null ? mHeight.hashCode() : 0);
-        result = 31 * result + (int) (mId ^ (mId >>> 32));
         return result;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Animal)) return false;
 
         Animal animal = (Animal) o;
 
         if (mId != animal.mId) return false;
         if (mName != null ? !mName.equals(animal.mName) : animal.mName != null) return false;
-        if (mSpecies != null ? !mSpecies.equals(animal.mSpecies) : animal.mSpecies != null)
-            return false;
-        if (mWeight != null ? !mWeight.equals(animal.mWeight) : animal.mWeight != null)
-            return false;
+        if (mSpecies != null ? !mSpecies.equals(animal.mSpecies) : animal.mSpecies != null) return false;
+        if (mWeight != null ? !mWeight.equals(animal.mWeight) : animal.mWeight != null) return false;
         return mHeight != null ? mHeight.equals(animal.mHeight) : animal.mHeight == null;
 
     }

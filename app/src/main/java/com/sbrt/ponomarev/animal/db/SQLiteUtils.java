@@ -11,8 +11,8 @@ public class SQLiteUtils {
                 getLong(cursor, AnimalsContract.Animal._ID),
                 getString(cursor, AnimalsContract.Animal.NAME),
                 getString(cursor, AnimalsContract.Animal.SPECIES),
-                getInt(cursor, AnimalsContract.Animal.WEIGHT),
-                getInt(cursor, AnimalsContract.Animal.HEIGHT)
+                getFloat(cursor, AnimalsContract.Animal.WEIGHT),
+                getFloat(cursor, AnimalsContract.Animal.HEIGHT)
         );
     }
 
@@ -24,8 +24,8 @@ public class SQLiteUtils {
         return cursor.getString(cursor.getColumnIndex(columnName));
     }
 
-    public static int getInt(Cursor cursor, String columnName) {
-        return cursor.getInt(cursor.getColumnIndex(columnName));
+    public static float getFloat(Cursor cursor, String columnName) {
+        return cursor.getFloat(cursor.getColumnIndex(columnName));
     }
 
     public static ContentValues createValuesFromAnimal(Animal animal) {
