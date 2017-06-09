@@ -1,12 +1,10 @@
 package com.sbrt.ponomarev.animal.db;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import com.sbrt.ponomarev.animal.Animal;
 
 import java.util.ArrayList;
@@ -32,37 +30,6 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
         super(context, name, null, version);
     }
 
-    private static Animal createAnimal(Cursor cursor) {
-        return new Animal(
-                getLong(cursor, AnimalsContract.Animal._ID),
-                getString(cursor, AnimalsContract.Animal.NAME),
-                getString(cursor, AnimalsContract.Animal.SPECIES),
-                getInt(cursor, AnimalsContract.Animal.WEIGHT),
-                getInt(cursor, AnimalsContract.Animal.HEIGHT)
-        );
-    }
-
-    private static long getLong(Cursor cursor, String columnName) {
-        return cursor.getLong(cursor.getColumnIndex(columnName));
-    }
-
-    private static String getString(Cursor cursor, String columnName) {
-        return cursor.getString(cursor.getColumnIndex(columnName));
-    }
-
-    private static int getInt(Cursor cursor, String columnName) {
-        return cursor.getInt(cursor.getColumnIndex(columnName));
-    }
-
-    private static ContentValues createValuesFromAnimal(Animal animal) {
-        ContentValues values = new ContentValues();
-        values.put(AnimalsContract.Animal.NAME, animal.getName());
-        values.put(AnimalsContract.Animal.SPECIES, animal.getSpecies());
-        values.put(AnimalsContract.Animal.WEIGHT, animal.getWeight());
-        values.put(AnimalsContract.Animal.HEIGHT, animal.getHeight());
-        return values;
-    }
-
     @Override
     public List<Animal> getAnimals() {
         List<Animal> animals = null;
@@ -73,7 +40,7 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
             animals = new ArrayList<>();
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                animals.add(createAnimal(cursor));
+                animals.add(SQLiteUtils.createAnimal(cursor));
                 cursor.moveToNext();
             }
         } finally {
@@ -88,7 +55,29 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
 
     @Override
     public Animal getAnimal(long id) {
-        throw new UnsupportedOperationException("|Not yet implemented");
+        Animal animal = null;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.query(TABLE_NAME,
+                    null,
+                    AnimalsContract.Animal._ID + "= ?",
+                    new String[]{String.valueOf(id)},
+                    null,
+                    null,
+                    null
+            );
+            cursor.moveToFirst();
+            if (cursor.isFirst()) {
+                animal = new Animal(SQLiteUtils.createAnimal(cursor));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return animal;
     }
 
     @Override
@@ -97,7 +86,7 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
-            id = db.insert(TABLE_NAME, null, createValuesFromAnimal(animal));
+            id = db.insert(TABLE_NAME, null, SQLiteUtils.createValuesFromAnimal(animal));
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -108,12 +97,39 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
 
     @Override
     public int updateAnimal(Animal animal) {
-        throw new UnsupportedOperationException("|Not yet implemented");
+        int rowUpdated = 0;
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            rowUpdated = db.update(TABLE_NAME,
+                    SQLiteUtils.createValuesFromAnimal(animal),
+                    AnimalsContract.Animal._ID + " = ?",
+                    new String[]{String.valueOf(animal.getId())}
+            );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return rowUpdated;
     }
 
     @Override
     public int deleteAnimal(Animal animal) {
-        throw new UnsupportedOperationException("|Not yet implemented");
+        int rowDeleted = 0;
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            rowDeleted = db.delete(TABLE_NAME,
+                    AnimalsContract.Animal._ID + " = ?",
+                    new String[]{String.valueOf(animal.getId())}
+            );
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return rowDeleted;
     }
 
     @Override
@@ -133,6 +149,6 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // TODO: implement upgrade logic
     }
 }

@@ -31,6 +31,15 @@ public class Animal implements Serializable {
         this.mHeight = Float.valueOf(height);
     }
 
+
+    public Animal(Animal animal) {
+        this.mId = animal.mId;
+        this.mName = animal.mName;
+        this.mSpecies = animal.mSpecies;
+        this.mWeight = animal.mWeight;
+        this.mHeight = animal.mHeight;
+    }
+
     public String getName() {
         return mName;
     }
@@ -56,6 +65,16 @@ public class Animal implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int result = mName != null ? mName.hashCode() : 0;
+        result = 31 * result + (mSpecies != null ? mSpecies.hashCode() : 0);
+        result = 31 * result + (mWeight != null ? mWeight.hashCode() : 0);
+        result = 31 * result + (mHeight != null ? mHeight.hashCode() : 0);
+        result = 31 * result + (int) (mId ^ (mId >>> 32));
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -70,15 +89,5 @@ public class Animal implements Serializable {
             return false;
         return mHeight != null ? mHeight.equals(animal.mHeight) : animal.mHeight == null;
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = mName != null ? mName.hashCode() : 0;
-        result = 31 * result + (mSpecies != null ? mSpecies.hashCode() : 0);
-        result = 31 * result + (mWeight != null ? mWeight.hashCode() : 0);
-        result = 31 * result + (mHeight != null ? mHeight.hashCode() : 0);
-        result = 31 * result + (int) (mId ^ (mId >>> 32));
-        return result;
     }
 }
