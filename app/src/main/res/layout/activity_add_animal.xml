@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <EditText
-        android:id="@+id/add_animal_species"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/add_animal_species"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:hint="@string/add_species"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/add_animal_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:hint="@string/add_name"
-        android:inputType="text" />
+            android:hint="@string/add_species"
+            android:inputType="text"/>
 
     <EditText
-        android:id="@+id/add_animal_weight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/add_animal_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:hint="@string/add_weight_kg"
-        android:inputType="number" />
+            android:hint="@string/add_name"
+            android:inputType="text"/>
 
     <EditText
-        android:id="@+id/add_animal_height"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:id="@+id/add_animal_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:hint="@string/add_height"
-        android:inputType="number" />
+            android:hint="@string/add_weight_kg"
+            android:inputType="number"/>
 
-    <Button
-        android:id="@+id/add_animal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+            android:id="@+id/add_animal_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:layout_gravity="center"
-        android:text="@string/add_animal" />
+            android:hint="@string/add_height"
+            android:inputType="number"/>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+        <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:text="@string/save"/>
+
+        <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:text="@string/delete"/>
+
+        <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:text="@string/cancel"/>
+
+    </LinearLayout>
 </LinearLayout>

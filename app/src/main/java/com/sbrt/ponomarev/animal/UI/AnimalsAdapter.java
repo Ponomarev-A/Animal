@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal;
+package com.sbrt.ponomarev.animal.UI;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.sbrt.ponomarev.animal.R;
+import com.sbrt.ponomarev.animal.bean.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class AnimalsAdapter extends RecyclerView.Adapter<AnimalsAdapter.AnimalVi
     public AnimalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.list_item, parent, false);
+        itemView.setOnClickListener((View.OnClickListener) mContext);
         return new AnimalViewHolder(itemView);
     }
 
@@ -47,9 +50,9 @@ public class AnimalsAdapter extends RecyclerView.Adapter<AnimalsAdapter.AnimalVi
         notifyDataSetChanged();
     }
 
-    /**
-     * Created by user15 on 20.05.2017.
-     */
+    public Animal getAnimal(int position) {
+        return mAnimals.get(position);
+    }
 
     class AnimalViewHolder extends RecyclerView.ViewHolder {
 

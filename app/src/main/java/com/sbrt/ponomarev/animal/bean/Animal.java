@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal;
+package com.sbrt.ponomarev.animal.bean;
 
 import java.io.Serializable;
 
@@ -87,5 +87,16 @@ public class Animal implements Serializable {
         if (mWeight != null ? !mWeight.equals(animal.mWeight) : animal.mWeight != null) return false;
         return mHeight != null ? mHeight.equals(animal.mHeight) : animal.mHeight == null;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "mId=" + mId +
+                ", mName='" + mName + '\'' +
+                ", mSpecies='" + mSpecies + '\'' +
+                ", mWeight=" + mWeight +
+                ", mHeight=" + mHeight +
+                '}';
     }
 }

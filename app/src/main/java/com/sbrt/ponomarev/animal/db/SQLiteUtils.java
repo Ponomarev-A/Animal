@@ -2,7 +2,7 @@ package com.sbrt.ponomarev.animal.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import com.sbrt.ponomarev.animal.Animal;
+import com.sbrt.ponomarev.animal.bean.Animal;
 
 public class SQLiteUtils {
 

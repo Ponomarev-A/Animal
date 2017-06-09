@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal;
+package com.sbrt.ponomarev.animal.UI;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,16 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.sbrt.ponomarev.animal.R;
+import com.sbrt.ponomarev.animal.bean.Animal;
+import com.sbrt.ponomarev.animal.bean.AnimalsStorage;
+import com.sbrt.ponomarev.animal.bean.AnimalsStorageProvider;
 
 /**
  * @author QuickNick.
  */
 
-public class AddAnimalActivity extends AppCompatActivity {
+public class AnimalActivity extends AppCompatActivity {
 
     private AnimalsStorage mAnimalsStorage;
 
@@ -22,8 +26,11 @@ public class AddAnimalActivity extends AppCompatActivity {
     private EditText mNameEditText;
     private EditText mWeightEditText;
     private EditText mHeightEditText;
-    private Button mAddButton;
+    private Button mSaveButton;
+    private Button mCancelButton;
+    private Button mDeleteButton;
     private EditText[] mEditTexts;
+    private long id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,32 +39,75 @@ public class AddAnimalActivity extends AppCompatActivity {
         mAnimalsStorage = provider.getAnimalsStorage();
 
         setContentView(R.layout.activity_add_animal);
+        initViews();
+
+        id = getIntent().getLongExtra(MainActivity.KEY_ID, -1);
+        if (id != -1) {
+            updateViews(mAnimalsStorage.getAnimal(id));
+        }
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animal animal = createAnimal();
+                if (id == -1) {
+                    mAnimalsStorage.addAnimal(animal);
+                } else {
+                    animal.setId(id);
+                    mAnimalsStorage.updateAnimal(animal);
+                }
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAnimalsStorage.deleteAnimal(id);
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+    }
+
+    private void initViews() {
         mSpeciesEditText = (EditText) findViewById(R.id.add_animal_species);
         mNameEditText = (EditText) findViewById(R.id.add_animal_name);
         mWeightEditText = (EditText) findViewById(R.id.add_animal_weight);
         mHeightEditText = (EditText) findViewById(R.id.add_animal_height);
-        mAddButton = (Button) findViewById(R.id.add_animal);
+        mSaveButton = (Button) findViewById(R.id.save);
+        mCancelButton = (Button) findViewById(R.id.cancel);
+        mDeleteButton = (Button) findViewById(R.id.delete);
         mEditTexts = new EditText[]{mSpeciesEditText, mWeightEditText, mHeightEditText, mNameEditText};
         for (EditText editText : mEditTexts) {
             editText.addTextChangedListener(new TextWatcherImpl());
         }
-
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAnimal();
-            }
-        });
     }
 
-    private void createAnimal() {
+    private void updateViews(Animal animal) {
+        mSpeciesEditText.setText(animal.getSpecies());
+        mNameEditText.setText(animal.getName());
+        mWeightEditText.setText(String.valueOf(animal.getWeight()));
+        mHeightEditText.setText(String.valueOf(animal.getHeight()));
+
+    }
+
+    private Animal createAnimal() {
         String species = mSpeciesEditText.getText().toString();
         String name = mNameEditText.getText().toString();
         float weight = Float.valueOf(mWeightEditText.getText().toString());
         float height = Float.valueOf(mHeightEditText.getText().toString());
-        Animal animal = new Animal(name, species, weight, height);
-        mAnimalsStorage.addAnimal(animal);
-        finish();
+        return new Animal(name, species, weight, height);
     }
 
     private class TextWatcherImpl implements TextWatcher {
@@ -81,7 +131,7 @@ public class AddAnimalActivity extends AppCompatActivity {
                     break;
                 }
             }
-            mAddButton.setEnabled(buttonEnabled);
+            mSaveButton.setEnabled(buttonEnabled);
         }
     }
 }

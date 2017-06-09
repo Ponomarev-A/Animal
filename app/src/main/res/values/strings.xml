@@ -4,9 +4,12 @@
     <string name="species">Species: %1$s</string>
     <string name="weight">%1$.0f kg</string>
     <string name="height">%1$.0f cm</string>
-    <string name="add_animal">add animal</string>
+    <string name="save">Save</string>
     <string name="add_species">Species (ex. Dog)</string>
     <string name="add_name">Name</string>
     <string name="add_weight_kg">Weight (kg)</string>
     <string name="add_height">Height (cm)</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">delete</string>
+    <string name="add_animal">Add animal</string>
 </resources>

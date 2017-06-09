@@ -1,6 +1,6 @@
 package com.sbrt.ponomarev.animal.db;
 
-import com.sbrt.ponomarev.animal.Animal;
+import com.sbrt.ponomarev.animal.bean.Animal;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface AnimalsDAO {
 
     int updateAnimal(Animal animal);
 
-    int deleteAnimal(Animal animal);
+    int deleteAnimal(long id);
 }

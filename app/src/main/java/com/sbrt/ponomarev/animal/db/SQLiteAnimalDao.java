@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.sbrt.ponomarev.animal.Animal;
+import com.sbrt.ponomarev.animal.bean.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,14 +115,14 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
     }
 
     @Override
-    public int deleteAnimal(Animal animal) {
+    public int deleteAnimal(long id) {
         int rowDeleted = 0;
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
             rowDeleted = db.delete(TABLE_NAME,
                     AnimalsContract.Animal._ID + " = ?",
-                    new String[]{String.valueOf(animal.getId())}
+                    new String[]{String.valueOf(id)}
             );
             db.setTransactionSuccessful();
         } finally {

@@ -1,7 +1,8 @@
 package com.sbrt.ponomarev.animal;
 
 import android.app.Application;
-
+import com.sbrt.ponomarev.animal.bean.AnimalsStorage;
+import com.sbrt.ponomarev.animal.bean.AnimalsStorageProvider;
 import com.sbrt.ponomarev.animal.db.SQLiteAnimalDao;
 
 /**

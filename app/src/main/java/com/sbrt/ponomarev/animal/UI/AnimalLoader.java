@@ -1,8 +1,10 @@
-package com.sbrt.ponomarev.animal;
+package com.sbrt.ponomarev.animal.UI;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+import com.sbrt.ponomarev.animal.bean.Animal;
+import com.sbrt.ponomarev.animal.bean.AnimalsStorage;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * Created by user15 on 18.05.2017.
  */
 
-public class AnimalLoader extends AsyncTaskLoader<List<Animal>> implements OnContentChangeListener {
+public class AnimalLoader extends AsyncTaskLoader<List<Animal>> {
 
     private static final String LOG = AnimalLoader.class.getName();
     private List<Animal> mCachedData;
@@ -21,6 +23,13 @@ public class AnimalLoader extends AsyncTaskLoader<List<Animal>> implements OnCon
 
         this.mAnimalsStorage = mAnimalsStorage;
         this.mAnimalsStorage.addOnContentChangeListener(this);
+    }
+
+    @Override
+    public void deliverResult(List<Animal> data) {
+        super.deliverResult(data);
+
+        mCachedData = data;
     }
 
     @Override
@@ -35,10 +44,10 @@ public class AnimalLoader extends AsyncTaskLoader<List<Animal>> implements OnCon
     }
 
     @Override
-    public void deliverResult(List<Animal> data) {
-        super.deliverResult(data);
-
-        mCachedData = data;
+    protected void onReset() {
+        super.onReset();
+        Log.e(LOG, "onReset");
+        mAnimalsStorage.removeOnContentChangeListener(this);
     }
 
     @Override
@@ -47,15 +56,7 @@ public class AnimalLoader extends AsyncTaskLoader<List<Animal>> implements OnCon
         return mAnimalsStorage.getAnimals();
     }
 
-    @Override
-    protected void onReset() {
-        super.onReset();
-        Log.e(LOG, "onReset");
-        mAnimalsStorage.removeOnContentChangeListener(this);
-    }
-
-    @Override
-    public void onAnimalAdded(AnimalsStorage storage, Animal animal) {
+    public void onAnimalChanged() {
         onContentChanged();
     }
 }
