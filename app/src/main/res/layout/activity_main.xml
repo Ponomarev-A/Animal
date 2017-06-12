@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                tools:context="com.sbrt.ponomarev.animal.UI.MainActivity">
+                tools:context="com.sbrt.ponomarev.animal.ui.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"

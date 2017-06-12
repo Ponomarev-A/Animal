@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal.UI;
+package com.sbrt.ponomarev.animal.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

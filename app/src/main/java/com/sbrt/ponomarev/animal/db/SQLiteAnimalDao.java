@@ -21,6 +21,7 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
     public static final String TABLE_NAME = "animals";
     private static final String NAME = "animals.db";
     private static final int CURRENT_VERSION = 1;
+    private static final int DEFAULT_ANIMAL_ID = -1;
 
     public SQLiteAnimalDao(Context context) {
         super(context, NAME, null, CURRENT_VERSION);
@@ -82,7 +83,7 @@ public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
 
     @Override
     public long insertAnimal(Animal animal) {
-        long id = -1;
+        long id = DEFAULT_ANIMAL_ID;
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {

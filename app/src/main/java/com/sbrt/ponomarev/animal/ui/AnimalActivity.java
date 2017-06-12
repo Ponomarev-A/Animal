@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal.UI;
+package com.sbrt.ponomarev.animal.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +20,7 @@ import com.sbrt.ponomarev.animal.bean.AnimalsStorageProvider;
 
 public class AnimalActivity extends AppCompatActivity {
 
+    private static final int DEFAULT_ANIMAL_ID = -1;
     private AnimalsStorage mAnimalsStorage;
 
     private EditText mSpeciesEditText;
@@ -30,7 +31,7 @@ public class AnimalActivity extends AppCompatActivity {
     private Button mCancelButton;
     private Button mDeleteButton;
     private EditText[] mEditTexts;
-    private long id;
+    private long mId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,19 +42,19 @@ public class AnimalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_animal);
         initViews();
 
-        id = getIntent().getLongExtra(MainActivity.KEY_ID, -1);
-        if (id != -1) {
-            updateViews(mAnimalsStorage.getAnimal(id));
+        mId = getIntent().getLongExtra(MainActivity.KEY_ID, DEFAULT_ANIMAL_ID);
+        if (mId != DEFAULT_ANIMAL_ID) {
+            updateViews(mAnimalsStorage.getAnimal(mId));
         }
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Animal animal = createAnimal();
-                if (id == -1) {
+                if (mId == DEFAULT_ANIMAL_ID) {
                     mAnimalsStorage.addAnimal(animal);
                 } else {
-                    animal.setId(id);
+                    animal.setId(mId);
                     mAnimalsStorage.updateAnimal(animal);
                 }
                 setResult(RESULT_OK);
@@ -72,7 +73,7 @@ public class AnimalActivity extends AppCompatActivity {
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAnimalsStorage.deleteAnimal(id);
+                mAnimalsStorage.deleteAnimal(mId);
                 setResult(RESULT_OK);
                 finish();
             }

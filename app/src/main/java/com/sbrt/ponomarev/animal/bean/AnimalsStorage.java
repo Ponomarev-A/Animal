@@ -1,6 +1,5 @@
 package com.sbrt.ponomarev.animal.bean;
 
-import com.sbrt.ponomarev.animal.UI.AnimalLoader;
 import com.sbrt.ponomarev.animal.db.AnimalsDAO;
 
 import java.util.ArrayList;
@@ -13,47 +12,48 @@ import java.util.List;
 public class AnimalsStorage {
 
     private static final String TAG = AnimalsStorage.class.getSimpleName();
-    private final List<AnimalLoader> mOnContentChangeListeners = new ArrayList<>();
-    private AnimalsDAO dao;
+
+    private final List<OnContentChangeListener> mOnContentChangeListeners = new ArrayList<>();
+    private AnimalsDAO mDao;
 
     public AnimalsStorage(AnimalsDAO dao) {
-        this.dao = dao;
+        this.mDao = dao;
     }
 
     public void addAnimal(Animal animal) {
-        dao.insertAnimal(animal);
-        for (AnimalLoader listener : mOnContentChangeListeners) {
+        mDao.insertAnimal(animal);
+        for (OnContentChangeListener listener : mOnContentChangeListeners) {
             listener.onAnimalChanged();
         }
     }
 
     public List<Animal> getAnimals() {
-        return new ArrayList<>(dao.getAnimals());
+        return new ArrayList<>(mDao.getAnimals());
     }
 
     public void updateAnimal(Animal animal) {
-        dao.updateAnimal(animal);
-        for (AnimalLoader listener : mOnContentChangeListeners) {
+        mDao.updateAnimal(animal);
+        for (OnContentChangeListener listener : mOnContentChangeListeners) {
             listener.onAnimalChanged();
         }
     }
 
     public void deleteAnimal(long id) {
-        dao.deleteAnimal(id);
-        for (AnimalLoader listener : mOnContentChangeListeners) {
+        mDao.deleteAnimal(id);
+        for (OnContentChangeListener listener : mOnContentChangeListeners) {
             listener.onAnimalChanged();
         }
     }
 
     public Animal getAnimal(long id) {
-        return dao.getAnimal(id);
+        return mDao.getAnimal(id);
     }
 
-    public void addOnContentChangeListener(AnimalLoader listener) {
+    public void addOnContentChangeListener(OnContentChangeListener listener) {
         mOnContentChangeListeners.add(listener);
     }
 
-    public void removeOnContentChangeListener(AnimalLoader listener) {
+    public void removeOnContentChangeListener(OnContentChangeListener listener) {
         mOnContentChangeListeners.remove(listener);
     }
 }

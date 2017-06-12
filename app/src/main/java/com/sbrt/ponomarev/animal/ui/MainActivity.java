@@ -1,4 +1,4 @@
-package com.sbrt.ponomarev.animal.UI;
+package com.sbrt.ponomarev.animal.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String LOG = MainActivity.class.getName();
     private static final int LOADER_ID = 10;
     private static final int ANIMAL_ACTIVITY_REQUEST_CODE = 10;
+
     private RecyclerView mAnimalsView;
     private AnimalsAdapter mAnimalAdapter;
     private AnimalsStorage mAnimalsStorage;
