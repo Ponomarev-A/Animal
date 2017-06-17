@@ -40,20 +40,39 @@ public class Animal implements Serializable {
         this.mHeight = animal.mHeight;
     }
 
+    public Animal() {
+    }
+
     public String getName() {
         return mName;
+    }
+
+    public void setName(String name) {
+        this.mName = name;
     }
 
     public String getSpecies() {
         return mSpecies;
     }
 
+    public void setSpecies(String species) {
+        this.mSpecies = species;
+    }
+
     public Float getWeight() {
         return mWeight;
     }
 
+    public void setWeight(Float weight) {
+        this.mWeight = weight;
+    }
+
     public Float getHeight() {
         return mHeight;
+    }
+
+    public void setHeight(Float height) {
+        this.mHeight = height;
     }
 
     public long getId() {

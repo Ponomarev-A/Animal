@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import com.sbrt.ponomarev.animal.bean.Animal;
 
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ import static android.content.ContentValues.TAG;
 public class SQLiteAnimalDao extends SQLiteOpenHelper implements AnimalsDAO {
 
     public static final String TABLE_NAME = "animals";
-    private static final String NAME = "animals.db";
-    private static final int CURRENT_VERSION = 1;
+    public static final int CURRENT_VERSION = 1;
+    public static final String NAME = "animals.db";
+
     private static final int DEFAULT_ANIMAL_ID = -1;
 
     public SQLiteAnimalDao(Context context) {
