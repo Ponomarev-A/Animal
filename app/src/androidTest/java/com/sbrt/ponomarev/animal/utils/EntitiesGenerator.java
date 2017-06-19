@@ -1,4 +1,4 @@
-package com.example.user15.unittest.utils;
+package com.sbrt.ponomarev.animal.utils;
 
 import com.sbrt.ponomarev.animal.bean.Animal;
 
@@ -16,15 +16,12 @@ public class EntitiesGenerator {
     private static final int END_CHAR = (int) 'Z';
     private static final Random RANDOM = new Random();
 
-    protected static String createRandomString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < SIZE; i++) {
-            int value = START_CHAR + RANDOM.nextInt(
-                    END_CHAR - START_CHAR
-            );
-            sb.append((char) value);
+    public static List<Animal> createRandomAnimalsList(boolean includeId) {
+        ArrayList<Animal> list = new ArrayList<>(10);
+        for (int i = 0; i < list.size(); i++) {
+            list.add(createRandomAnimal(includeId));
         }
-        return sb.toString();
+        return list;
     }
 
     public static Animal createRandomAnimal(boolean includeId) {
@@ -39,11 +36,14 @@ public class EntitiesGenerator {
         return animal;
     }
 
-    public static List<Animal> createRandomAnimalsList(boolean includeId) {
-        ArrayList<Animal> list = new ArrayList<>(10);
-        for (int i = 0; i < list.size(); i++) {
-            list.add(createRandomAnimal(includeId));
+    protected static String createRandomString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < SIZE; i++) {
+            int value = START_CHAR + RANDOM.nextInt(
+                    END_CHAR - START_CHAR
+            );
+            sb.append((char) value);
         }
-        return list;
+        return sb.toString();
     }
 }

@@ -1,12 +1,10 @@
-package com.example.user15.unittest.utils;
+package com.sbrt.ponomarev.animal.utils;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
-
 import com.sbrt.ponomarev.animal.db.AnimalsDAO;
 import com.sbrt.ponomarev.animal.db.SQLiteAnimalDao;
-
 import org.junit.rules.ExternalResource;
 
 public class AnimalDaoRule extends ExternalResource {

@@ -1,12 +1,10 @@
-package com.example.user15.unittest;
+package com.sbrt.ponomarev.animal;
 
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
-
-import com.example.user15.unittest.utils.AnimalDaoRule;
-import com.example.user15.unittest.utils.EntitiesGenerator;
 import com.sbrt.ponomarev.animal.bean.Animal;
-
+import com.sbrt.ponomarev.animal.utils.AnimalDaoRule;
+import com.sbrt.ponomarev.animal.utils.EntitiesGenerator;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,6 +45,16 @@ public class AnimalDaoTest {
     }
 
     @Test
+    public void testInsertNullAnimal() throws Exception {
+        Log.e(TAG, "test name: " + testName.getMethodName());
+
+        thrown.expect(NullPointerException.class);
+
+        Animal animal = null;
+        daoRule.getDao().insertAnimal(animal);
+    }
+
+    @Test
     public void testGetAnimalById() throws Exception {
         Log.e(TAG, "test name: " + testName.getMethodName());
 
@@ -55,15 +63,5 @@ public class AnimalDaoTest {
         long id = daoRule.getDao().insertAnimal(animal);
         animal.setId(id);
         assertThat(animal, is(daoRule.getDao().getAnimal(id)));
-    }
-
-    @Test
-    public void testInsertNullAnimal() throws Exception {
-        Log.e(TAG, "test name: " + testName.getMethodName());
-
-        thrown.expect(NullPointerException.class);
-
-        Animal animal = null;
-        daoRule.getDao().insertAnimal(animal);
     }
 }
