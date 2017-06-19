@@ -12,25 +12,25 @@ public class AnimalDaoRule extends ExternalResource {
     private static final String DATABASE_NAME = "test.db";
     private static final String TAG = AnimalDaoRule.class.getSimpleName();
 
-    private SQLiteAnimalDao dao;
-    private Context context = InstrumentationRegistry.getTargetContext();
+    private SQLiteAnimalDao mDao;
+    private Context mContext = InstrumentationRegistry.getTargetContext();
 
     public AnimalsDAO getDao() {
-        return dao;
+        return mDao;
     }
 
     @Override
     protected void before() throws Throwable {
         super.before();
-        dao = new SQLiteAnimalDao(context, DATABASE_NAME, SQLiteAnimalDao.CURRENT_VERSION);
+        mDao = new SQLiteAnimalDao(mContext, DATABASE_NAME, SQLiteAnimalDao.CURRENT_VERSION);
         Log.e(TAG, "before");
     }
 
     @Override
     protected void after() {
         super.after();
-        dao.close();
-        context.deleteDatabase(DATABASE_NAME);
+        mDao.close();
+        mContext.deleteDatabase(DATABASE_NAME);
         Log.e(TAG, "after");
     }
 }
