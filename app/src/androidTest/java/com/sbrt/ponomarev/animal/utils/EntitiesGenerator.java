@@ -17,8 +17,8 @@ public class EntitiesGenerator {
     private static final Random RANDOM = new Random();
 
     public static List<Animal> createRandomAnimalsList(boolean includeId) {
-        ArrayList<Animal> list = new ArrayList<>(10);
-        for (int i = 0; i < list.size(); i++) {
+        ArrayList<Animal> list = new ArrayList<>(SIZE);
+        for (int i = 0; i < SIZE; i++) {
             list.add(createRandomAnimal(includeId));
         }
         return list;

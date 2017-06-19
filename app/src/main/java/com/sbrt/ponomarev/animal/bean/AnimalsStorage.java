@@ -14,10 +14,14 @@ public class AnimalsStorage {
     private static final String TAG = AnimalsStorage.class.getSimpleName();
 
     private final List<OnContentChangeListener> mOnContentChangeListeners = new ArrayList<>();
-    private AnimalsDAO mDao;
 
+    private AnimalsDAO mDao;
     public AnimalsStorage(AnimalsDAO dao) {
         this.mDao = dao;
+    }
+
+    public List<OnContentChangeListener> getContentChangeListeners() {
+        return mOnContentChangeListeners;
     }
 
     public void addAnimal(Animal animal) {
