@@ -17,6 +17,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -48,10 +49,11 @@ public class AnimalDaoTest {
 
     @Test
     public void testGetAnimals() throws Exception {
-        List<Animal> animals = EntitiesGenerator.createRandomAnimalsList(true);
+        List<Animal> animals = EntitiesGenerator.createRandomAnimalsList(false);
 
         for (Animal animal : animals) {
-            mDaoRule.getDao().insertAnimal(animal);
+            long id = mDaoRule.getDao().insertAnimal(animal);
+            animal.setId(id);
         }
 
         assertThat(mDaoRule.getDao().getAnimals(), containsInAnyOrder(animals.toArray(new Animal[animals.size()])));
@@ -62,7 +64,7 @@ public class AnimalDaoTest {
         Animal animal = EntitiesGenerator.createRandomAnimal(true);
 
         long id = mDaoRule.getDao().insertAnimal(animal);
-        assertThat(true, is(id > 0));
+        assertThat(id, is(greaterThan(0L)));
     }
 
     @Test
@@ -88,19 +90,6 @@ public class AnimalDaoTest {
 
         int updatedRows = mDaoRule.getDao().updateAnimal(animal2);
         assertThat(updatedRows, is(1));
-    }
-
-    @Test
-    public void testUpdateUnExistedAnimal() throws Exception {
-        Animal animal1 = EntitiesGenerator.createRandomAnimal(true);
-        Animal animal2 = EntitiesGenerator.createRandomAnimal(true);
-
-        // Check that animal1 and animal2 are different objects
-        assertThat(animal2, not(animal1));
-
-        mDaoRule.getDao().insertAnimal(animal1);
-        int updatedRows = mDaoRule.getDao().updateAnimal(animal2);
-        assertThat(updatedRows, is(0));
     }
 
     @Test
